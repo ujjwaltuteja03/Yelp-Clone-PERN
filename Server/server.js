@@ -11,7 +11,7 @@ const port = process.env.PORT || 3001;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const buildPath = path.join(__dirname, "..", "client", "build");
+const buildPath = path.join(process.cwd(), "..", "client", "build");
 
 app.use(cors());
 app.use(express.json());
@@ -138,11 +138,11 @@ app.post("/api/v1/restaurants/:id/addReview", async (req, res) => {
 app.use(express.static(buildPath));
 
 app.use((req, res) => {
-  console.log("Serving index.html from:", path.join(buildPath, "index.html"));
+  console.log("Railway looking for file at:", path.join(buildPath, "index.html"));
   res.sendFile(path.join(buildPath, "index.html"));
 });
 
 app.listen(port, () => {
-  console.log(`Server is up! Listening on port ${port}`);
-  console.log("Build path is set to:", buildPath);
+  console.log(`Server live on port ${port}`);
+  console.log("Verified Build Path:", buildPath);
 });
