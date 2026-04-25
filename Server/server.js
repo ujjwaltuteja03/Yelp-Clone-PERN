@@ -11,7 +11,7 @@ const port = process.env.PORT || 3001;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const buildPath = path.join(process.cwd(), "..", "client", "build");
+const buildPath = "/app/client/build";
 
 app.use(cors());
 app.use(express.json());
@@ -134,15 +134,15 @@ app.post("/api/v1/restaurants/:id/addReview", async (req, res) => {
   }
 });
 
-// Serve the static files from the React build folder
+// Serve the static files
 app.use(express.static(buildPath));
 
+// The Catch-all
 app.use((req, res) => {
-  console.log("Railway looking for file at:", path.join(buildPath, "index.html"));
   res.sendFile(path.join(buildPath, "index.html"));
 });
 
 app.listen(port, () => {
   console.log(`Server live on port ${port}`);
-  console.log("Verified Build Path:", buildPath);
+  console.log("Hardcoded Build Path:", buildPath);
 });
