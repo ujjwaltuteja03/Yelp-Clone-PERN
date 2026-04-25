@@ -135,7 +135,7 @@ app.post("/api/v1/restaurants/:id/addReview", async (req, res) => {
 app.use(express.static(path.join(__dirname, ".." , "client", "build")));
 
 // The "Catch-all" handler: for any request that doesn't match an API route, send back React's index.html file.
-app.get("*", (req, res) => {
+app.get(".*", (req, res) => {
   res.sendFile(path.join(__dirname, ".." , "client", "build", "index.html"));
 });
 
