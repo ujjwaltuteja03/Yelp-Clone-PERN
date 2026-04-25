@@ -10,6 +10,9 @@ const port = process.env.PORT || 3001;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const buildPath = path.resolve(__dirname, "..", "client", "build");
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -132,12 +135,14 @@ app.post("/api/v1/restaurants/:id/addReview", async (req, res) => {
 });
 
 // Serve the static files from the React build folder
-app.use(express.static(path.join(__dirname, ".." , "client", "build")));
+app.use(express.static(buildPath));
 
 app.use((req, res) => {
-  res.sendFile(path.join(__dirname, "..", "client", "build", "index.html"));
+  console.log("Serving index.html from:", path.join(buildPath, "index.html"));
+  res.sendFile(path.join(buildPath, "index.html"));
 });
 
 app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+  console.log(`Server is up! Listening on port ${port}`);
+  console.log("Build path is set to:", buildPath);
 });
