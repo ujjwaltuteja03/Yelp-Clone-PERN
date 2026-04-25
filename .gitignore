@@ -1,0 +1,11 @@
+# General
+node_modules/
+.DS_Store
+
+# Backend
+Server/.env
+Server/node_modules/
+
+# Frontend
+client/node_modules/
+client/build/
